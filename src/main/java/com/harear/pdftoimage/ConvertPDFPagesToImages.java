@@ -14,8 +14,8 @@ public class ConvertPDFPagesToImages {
 
   public static void main(String[] args) {
     try {
-      String sourceDir = "/home/hharera/Mol5s/الخطوبة الواضحة.pdf"; // Pdf files are read from this folder
-      String destinationDir = "/home/hharera/Mol5s/";
+      String sourceDir = "/home/hharera/Mol5s/علم النفس الايجابى/علم النفس الايجابى.pdf";
+      String destinationDir = "/home/hharera/Mol5s/علم النفس الايجابى/";
 
       File sourceFile = new File(sourceDir);
       File destinationFile = new File(destinationDir);
@@ -32,8 +32,8 @@ public class ConvertPDFPagesToImages {
         String fileName = sourceFile.getName().replace(".pdf", "");
         int pageNumber = 1;
         for (PDPage page : list) {
-          BufferedImage image = page.convertToImage(1, 1024);
-          File outputfile = new File(destinationDir + fileName + "_" + pageNumber + ".png");
+          BufferedImage image = page.convertToImage(1, 240);
+          File outputfile = new File(destinationDir + pageNumber + ".png");
           System.out.println("Image Created -> " + outputfile.getName());
           ImageIO.write(image, "png", outputfile);
           pageNumber++;
