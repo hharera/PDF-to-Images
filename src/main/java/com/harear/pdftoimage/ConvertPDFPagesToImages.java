@@ -14,8 +14,8 @@ public class ConvertPDFPagesToImages {
 
   public static void main(String[] args) {
     try {
-      String sourceDir = "/home/hharera/Mol5s/علم النفس الايجابى/علم النفس الايجابى.pdf";
-      String destinationDir = "/home/hharera/Mol5s/علم النفس الايجابى/";
+      String sourceDir = "/home/hharera/Mol5s/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر.pdf";
+      String destinationDir = "/home/hharera/Mol5s/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر/pages/";
 
       File sourceFile = new File(sourceDir);
       File destinationFile = new File(destinationDir);
