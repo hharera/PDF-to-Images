@@ -1,12 +1,12 @@
 #!/bin/bash
 
-path="/home/hharera/Mol5s/موسوعة المسلم في التوبة والترقي في مدارج الإيمان المجلد الاول/pages";
+path="/home/hharera/Mol5s/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر/pages";
 
-for ((i = 1; i <= 650; i++)); do
+for ((i = 47; i <= 47; i++)); do
     filename="${path}/${i}.png"
     output="${path}/${i}"
 
-    tesseract "$filename" "$output" -l ara
+    tesseract --dpi 70 "$filename" "$output" -l ara
 
     echo "Processed $filename"
 done

@@ -3,19 +3,18 @@ package com.harear.pdftoimage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
-
 import javax.imageio.ImageIO;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.springframework.stereotype.Service;
 
-@SuppressWarnings("unchecked")
-public class ConvertPDFPagesToImages {
+@Service
+public class BookToImagesService {
 
-  public static void main(String[] args) {
+  public void convert(String bookName) {
     try {
-      String sourceDir = "/home/hharera/Mol5s/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر.pdf";
-      String destinationDir = "/home/hharera/Mol5s/الأسس النفسية لتنمية الشخصية الإيجابية للمسلم المعاصر/pages/";
+      String sourceDir = "/home/hharera/Mol5s/%s/%s.pdf".formatted(bookName, bookName);
+      String destinationDir = "/home/hharera/Mol5s/%s/pages/".formatted(bookName);
 
       File sourceFile = new File(sourceDir);
       File destinationFile = new File(destinationDir);
