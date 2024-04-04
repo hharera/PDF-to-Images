@@ -1,4 +1,4 @@
-package com.harear.pdftoimage;
+package com.harear.quraa.ocr;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,41 +6,48 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookToImagesService {
+public class BookOcrService {
 
-  public void convert(String bookName) {
+  @Value("${quraa.book_absolute_path}")
+  private String bookAbsolutePath;
+
+  @Value("${quraa.book_directory}")
+  private String bookDirectory;
+
+  public void convert() {
     try {
-      String sourceDir = "/home/hharera/Mol5s/%s/%s.pdf".formatted(bookName, bookName);
-      String destinationDir = "/home/hharera/Mol5s/%s/pages/".formatted(bookName);
+      String sourceDir = bookAbsolutePath;
+      String destinationDir = bookDirectory + "/pages/";
 
       File sourceFile = new File(sourceDir);
       File destinationFile = new File(destinationDir);
       if (!destinationFile.exists()) {
         destinationFile.mkdir();
-        System.out.println("Folder Created -> " + destinationFile.getAbsolutePath());
       }
       if (sourceFile.exists()) {
-        System.out.println("Images copied to Folder: " + destinationFile.getName());
         PDDocument document = PDDocument.load(sourceDir);
         List<PDPage> list = document.getDocumentCatalog().getAllPages();
-        System.out.println("Total files to be converted -> " + list.size());
 
-        String fileName = sourceFile.getName().replace(".pdf", "");
         int pageNumber = 1;
         for (PDPage page : list) {
+          File pageFile = new File(destinationDir + pageNumber + ".png");
+          File txtFile = new File(destinationDir + pageNumber + ".txt");
+          if (pageFile.exists() || txtFile.exists()) {
+            pageNumber++;
+            continue;
+          }
+
           BufferedImage image = page.convertToImage(1, 240);
           File outputfile = new File(destinationDir + pageNumber + ".png");
-          System.out.println("Image Created -> " + outputfile.getName());
           ImageIO.write(image, "png", outputfile);
           pageNumber++;
         }
         document.close();
-        System.out.println("Converted Images are saved at -> " + destinationFile.getAbsolutePath());
       } else {
-        System.err.println(sourceFile.getName() + " File not exists");
       }
 
     } catch (Exception e) {
